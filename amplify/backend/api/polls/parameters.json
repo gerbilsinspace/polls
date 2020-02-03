@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "polls",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authpollsfe0606de",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

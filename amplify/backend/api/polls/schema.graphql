@@ -1,0 +1,12 @@
+type Poll @model {
+  id: ID!
+  name: String!
+  votes: [Vote] @connection(name: "PollVotes")
+}
+
+type Vote @model {
+  id: ID!
+  user: String!
+  vote: String!
+  poll: Poll @connection(name: "PollVotes")
+}
