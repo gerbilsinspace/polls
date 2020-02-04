@@ -6,7 +6,7 @@ type Poll @model {
 
 type Vote @model {
   id: ID!
-  user: String!
   vote: String!
+  count: Int!
   poll: Poll @connection(name: "PollVotes")
 }

@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { Link } from "react-router-dom";
-
-interface Props {
-  signedIn: boolean;
-}
+import Header from "./Header";
 
 interface Poll {
   id: string;
   name: string;
 }
 
-const Polls = ({ signedIn }: Props) => {
+const Polls = () => {
   const [polls, setPolls] = useState([]);
+  const [updateCount, setUpdateCount] = useState(0);
 
   useEffect(() => {
     const getPolls = async () => {
@@ -34,10 +32,27 @@ const Polls = ({ signedIn }: Props) => {
     };
 
     getPolls();
-  }, []);
+  }, [updateCount]);
+
+  useEffect(() => {
+    const watchForNewPolls = async () => {
+      const addPollSubscription = `subscription addPollSubscription {
+        onCreatePoll {
+          id
+          name
+        }
+      }`;
+
+      const newPoll = await API.graphql(graphqlOperation(addPollSubscription));
+      console.log("setup watching for new poll", newPoll);
+    };
+
+    watchForNewPolls();
+  }, [updateCount]);
 
   return (
     <div>
+      <Header />
       <header className='App-header'>
         <h1>
           Polls{" "}

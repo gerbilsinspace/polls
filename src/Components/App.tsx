@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import Amplify from "aws-amplify";
-import awsconfig from "./aws-exports";
+import awsconfig from "../aws-exports";
 import { Authenticator } from "aws-amplify-react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Polls from "./Polls";
 import CreatePoll from "./CreatePoll";
 import Details from "./Details";
+import AddVote from "./AddVote";
 import "./App.css";
 
 Amplify.configure(awsconfig);
-
-interface Props {
-  authState: string;
-}
 
 const signUpConfig = {
   header: "Polls",
@@ -37,12 +34,15 @@ const App = () => {
         />
         <Switch>
           <Route path='/' exact>
-            <Polls signedIn={signedIn} />
+            <Polls />
           </Route>
           <Route path='/create' exact>
             <CreatePoll />
           </Route>
-          <Route path='/details/:id'>
+          <Route path='/details/:id/add-vote' exact>
+            <AddVote />
+          </Route>
+          <Route path='/details/:id' exact>
             <Details />
           </Route>
         </Switch>

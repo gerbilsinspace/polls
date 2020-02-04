@@ -12,8 +12,8 @@ export const createPoll = /* GraphQL */ `
       votes {
         items {
           id
-          user
           vote
+          count
         }
         nextToken
       }
@@ -31,8 +31,8 @@ export const updatePoll = /* GraphQL */ `
       votes {
         items {
           id
-          user
           vote
+          count
         }
         nextToken
       }
@@ -50,8 +50,8 @@ export const deletePoll = /* GraphQL */ `
       votes {
         items {
           id
-          user
           vote
+          count
         }
         nextToken
       }
@@ -65,8 +65,8 @@ export const createVote = /* GraphQL */ `
   ) {
     createVote(input: $input, condition: $condition) {
       id
-      user
       vote
+      count
       poll {
         id
         name
@@ -84,8 +84,8 @@ export const updateVote = /* GraphQL */ `
   ) {
     updateVote(input: $input, condition: $condition) {
       id
-      user
       vote
+      count
       poll {
         id
         name
@@ -103,8 +103,8 @@ export const deleteVote = /* GraphQL */ `
   ) {
     deleteVote(input: $input, condition: $condition) {
       id
-      user
       vote
+      count
       poll {
         id
         name

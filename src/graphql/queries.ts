@@ -9,8 +9,8 @@ export const getPoll = /* GraphQL */ `
       votes {
         items {
           id
-          user
           vote
+          count
         }
         nextToken
       }
@@ -39,8 +39,8 @@ export const getVote = /* GraphQL */ `
   query GetVote($id: ID!) {
     getVote(id: $id) {
       id
-      user
       vote
+      count
       poll {
         id
         name
@@ -60,8 +60,8 @@ export const listVotes = /* GraphQL */ `
     listVotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        user
         vote
+        count
         poll {
           id
           name

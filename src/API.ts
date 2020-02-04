@@ -64,23 +64,35 @@ export type DeletePollInput = {
 
 export type CreateVoteInput = {
   id?: string | null,
-  user: string,
   vote: string,
+  count: number,
   votePollId?: string | null,
 };
 
 export type ModelVoteConditionInput = {
-  user?: ModelStringInput | null,
   vote?: ModelStringInput | null,
+  count?: ModelIntInput | null,
   and?: Array< ModelVoteConditionInput | null > | null,
   or?: Array< ModelVoteConditionInput | null > | null,
   not?: ModelVoteConditionInput | null,
 };
 
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type UpdateVoteInput = {
   id: string,
-  user?: string | null,
   vote?: string | null,
+  count?: number | null,
   votePollId?: string | null,
 };
 
@@ -114,8 +126,8 @@ export type ModelIDInput = {
 
 export type ModelVoteFilterInput = {
   id?: ModelIDInput | null,
-  user?: ModelStringInput | null,
   vote?: ModelStringInput | null,
+  count?: ModelIntInput | null,
   and?: Array< ModelVoteFilterInput | null > | null,
   or?: Array< ModelVoteFilterInput | null > | null,
   not?: ModelVoteFilterInput | null,
@@ -136,8 +148,8 @@ export type CreatePollMutation = {
       items:  Array< {
         __typename: "Vote",
         id: string,
-        user: string,
         vote: string,
+        count: number,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -159,8 +171,8 @@ export type UpdatePollMutation = {
       items:  Array< {
         __typename: "Vote",
         id: string,
-        user: string,
         vote: string,
+        count: number,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -182,8 +194,8 @@ export type DeletePollMutation = {
       items:  Array< {
         __typename: "Vote",
         id: string,
-        user: string,
         vote: string,
+        count: number,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -199,8 +211,8 @@ export type CreateVoteMutation = {
   createVote:  {
     __typename: "Vote",
     id: string,
-    user: string,
     vote: string,
+    count: number,
     poll:  {
       __typename: "Poll",
       id: string,
@@ -222,8 +234,8 @@ export type UpdateVoteMutation = {
   updateVote:  {
     __typename: "Vote",
     id: string,
-    user: string,
     vote: string,
+    count: number,
     poll:  {
       __typename: "Poll",
       id: string,
@@ -245,8 +257,8 @@ export type DeleteVoteMutation = {
   deleteVote:  {
     __typename: "Vote",
     id: string,
-    user: string,
     vote: string,
+    count: number,
     poll:  {
       __typename: "Poll",
       id: string,
@@ -273,8 +285,8 @@ export type GetPollQuery = {
       items:  Array< {
         __typename: "Vote",
         id: string,
-        user: string,
         vote: string,
+        count: number,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -311,8 +323,8 @@ export type GetVoteQuery = {
   getVote:  {
     __typename: "Vote",
     id: string,
-    user: string,
     vote: string,
+    count: number,
     poll:  {
       __typename: "Poll",
       id: string,
@@ -337,8 +349,8 @@ export type ListVotesQuery = {
     items:  Array< {
       __typename: "Vote",
       id: string,
-      user: string,
       vote: string,
+      count: number,
       poll:  {
         __typename: "Poll",
         id: string,
@@ -359,8 +371,8 @@ export type OnCreatePollSubscription = {
       items:  Array< {
         __typename: "Vote",
         id: string,
-        user: string,
         vote: string,
+        count: number,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -377,8 +389,8 @@ export type OnUpdatePollSubscription = {
       items:  Array< {
         __typename: "Vote",
         id: string,
-        user: string,
         vote: string,
+        count: number,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -395,8 +407,8 @@ export type OnDeletePollSubscription = {
       items:  Array< {
         __typename: "Vote",
         id: string,
-        user: string,
         vote: string,
+        count: number,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -407,8 +419,8 @@ export type OnCreateVoteSubscription = {
   onCreateVote:  {
     __typename: "Vote",
     id: string,
-    user: string,
     vote: string,
+    count: number,
     poll:  {
       __typename: "Poll",
       id: string,
@@ -425,8 +437,8 @@ export type OnUpdateVoteSubscription = {
   onUpdateVote:  {
     __typename: "Vote",
     id: string,
-    user: string,
     vote: string,
+    count: number,
     poll:  {
       __typename: "Poll",
       id: string,
@@ -443,8 +455,8 @@ export type OnDeleteVoteSubscription = {
   onDeleteVote:  {
     __typename: "Vote",
     id: string,
-    user: string,
     vote: string,
+    count: number,
     poll:  {
       __typename: "Poll",
       id: string,

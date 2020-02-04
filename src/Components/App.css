@@ -1,5 +1,6 @@
 .App {
   background-color: #282c34;
+  color: rgba(255, 255, 255, 0.8);
   height: 100vh;
 }
 
@@ -40,6 +41,10 @@
   width: 800px;
   margin: 0 auto 10px;
   font-size: 1.5em;
+}
+
+h1 {
+  font-size: 1.3em;
 }
 
 a {
@@ -84,4 +89,28 @@ small {
 
 .form-field div {
   color: rgba(231, 66, 66, 0.95);
+}
+
+.container {
+  width: 800px;
+  margin: 0 auto 20px;
+}
+
+.vote-item {
+  margin-bottom: 20px;
+}
+
+.vote-item-button {
+  margin-left: 20px;
+}
+
+.header-main {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+}
+
+.header-main a {
+  color: #282c34;
+  font-size: 2em;
 }

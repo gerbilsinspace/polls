@@ -9,8 +9,8 @@ export const onCreatePoll = /* GraphQL */ `
       votes {
         items {
           id
-          user
           vote
+          count
         }
         nextToken
       }
@@ -25,8 +25,8 @@ export const onUpdatePoll = /* GraphQL */ `
       votes {
         items {
           id
-          user
           vote
+          count
         }
         nextToken
       }
@@ -41,8 +41,8 @@ export const onDeletePoll = /* GraphQL */ `
       votes {
         items {
           id
-          user
           vote
+          count
         }
         nextToken
       }
@@ -53,8 +53,8 @@ export const onCreateVote = /* GraphQL */ `
   subscription OnCreateVote {
     onCreateVote {
       id
-      user
       vote
+      count
       poll {
         id
         name
@@ -69,8 +69,8 @@ export const onUpdateVote = /* GraphQL */ `
   subscription OnUpdateVote {
     onUpdateVote {
       id
-      user
       vote
+      count
       poll {
         id
         name
@@ -85,8 +85,8 @@ export const onDeleteVote = /* GraphQL */ `
   subscription OnDeleteVote {
     onDeleteVote {
       id
-      user
       vote
+      count
       poll {
         id
         name
