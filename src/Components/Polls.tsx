@@ -43,12 +43,28 @@ const Polls = () => {
         }
       }`;
 
-      const newPoll = await API.graphql(graphqlOperation(addPollSubscription));
-      console.log("setup watching for new poll", newPoll);
+      const subscription = API.graphql(
+        graphqlOperation(addPollSubscription)
+      ).subscribe({
+        next: (data: { value: { data: { onCreatePoll: Poll } } }) => {
+          const { value } = data || {};
+          const pollData = value.data || {};
+          const { onCreatePoll } = pollData || {};
+
+          // 'as any' probably gross, was only way I could get TS to like this
+          const newPolls = [...polls, onCreatePoll] as any;
+
+          setPolls(newPolls);
+        }
+      });
+
+      return () => {
+        subscription.unsubscribe();
+      };
     };
 
     watchForNewPolls();
-  }, [updateCount]);
+  }, []);
 
   return (
     <div>

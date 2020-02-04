@@ -9,6 +9,11 @@ interface Vote {
   count: number;
 }
 
+interface Poll {
+  id: string;
+  name: string;
+}
+
 const Details = () => {
   let { id } = useParams();
   const [name, setName] = useState("");
@@ -44,7 +49,36 @@ const Details = () => {
     };
 
     getPoll();
-  }, [id, voteChangeCount]);
+  }, [id]);
+
+  useEffect(() => {
+    const watchForNewPolls = async () => {
+      const updatePollSubscription = `subscription addPollSubscription {
+        onCreatePoll {
+          id
+          name
+        }
+      }`;
+
+      const subscription = API.graphql(
+        graphqlOperation(updatePollSubscription)
+      ).subscribe({
+        next: (data: { value: { data: { onUpdatePoll: Poll } } }) => {
+          const { value } = data || {};
+          const pollData = value.data || {};
+          const { onUpdatePoll } = pollData || {};
+
+          console.log(onUpdatePoll);
+        }
+      });
+
+      return () => {
+        subscription.unsubscribe();
+      };
+    };
+
+    watchForNewPolls();
+  }, []);
 
   const onCastVoteClick = async (voteId: string, count: number) => {
     const updateVoteCountMutation = `mutation updateVote ($id: ID!, $count: Int!) {
